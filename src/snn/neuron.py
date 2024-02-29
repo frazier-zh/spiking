@@ -37,6 +37,7 @@ def adaptive_neuron_init(size, init_params=None):
 def adaptiva_neuron_dynamics(n, i):
     """Adaptive neuron dynamics.
     n: numpy array of neuron states
+        (10, size)
         [0] membrane potential
         [1] adaptive threshold
 
@@ -50,7 +51,7 @@ def adaptiva_neuron_dynamics(n, i):
         [8] refractory countdown
         [9] refractory period
     i: numpy list of input spikes
-        (size, 1)
+        (size, )
     """
     active_mask = n[8] <= 0 # get active neuron mask
     n[0] = n[0] + i * active_mask * n[2] + (n[3] - n[0]) / n[4] # update membrane potential

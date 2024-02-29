@@ -109,7 +109,7 @@ class NeuralNet:
     def synapse_savefig(self):
         visualize(self.net.synapses, self.output_path+f'synapse_{self.step}_synapse', w_min=0, w_max=1, arange=[5, 5])
 
-net = NeuralNet('./snapshots_02292024_1014/')
+net = NeuralNet('./snapshots_synapse_new/')
 
 train_steps = 6000
 batch_size = 100
