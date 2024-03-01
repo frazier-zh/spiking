@@ -5,6 +5,7 @@
 import numpy as np
 from .neuron import adaptiva_neuron_dynamics, adaptive_neuron_init, adaptiva_neuron_reset
 from . import synapse
+#from .synapse_new import synapse_init, synapse_dynamic, synapse_reset
 
 class preceptron_layer():
     def __init__(self, input_shape, output_shape,
@@ -45,15 +46,16 @@ class preceptron_layer():
         for t in range(spike_train_length):
             # neuron dynamics
             synapse_output = np.dot(self.synapses, input[:, t]) / self.input_shape
+            #synapse_output = synapse_dynamic(self.synapses, input[:, t], output[:, t-1]) / self.input_shape
             neuron_output = adaptiva_neuron_dynamics(self.neurons, synapse_output)
             output[:, t] = neuron_output
 
             # Winner-take-all for every layer
             fired_location = np.where(neuron_output)[0]
 
-            for loc in fired_location:
-                if self.synapse_update_enabled:
-                    synapse.update(self.synapses[loc], input, t)
+            # for loc in fired_location:
+            #     if self.synapse_update_enabled:
+            #         synapse.update(self.synapses[loc], input, t)
 
             # for homeostasis
             if self.homeostasis_spike_count:

@@ -49,7 +49,7 @@ def update(synapses, spike_train, tick, decay=True):
         fired = np.where(spike_train[i][tick_lo:tick_hi])[0]
         if fired.size:
             t_fired = fired[np.argmin(np.abs(fired-t_diff))]
-            synapses[i] += (f_stdp[t_causal_tick+t_fired-t_diff]) *(1+(2*np.random.rand()-1)*0.1)
+            synapses[i] += (f_stdp[t_causal_tick+t_fired-t_diff]) #*(1+(2*np.random.rand()-1)*0.1)
         elif decay:
             synapses[i] -= a_linear_decay
 
@@ -64,8 +64,8 @@ def update_lateral(synapses_to, synapses_from, spike_train, tick, decay=True):
         fired = np.where(spike_train[i][tick_lo:tick])[0]
         if fired.size:
             dtick = t_diff-fired[-1]
-            synapses_from[i] += f_acause[dtick] *(1+(2*np.random.rand()-1)*0.1)
-            synapses_to[i] += f_causal[-dtick] *(1+(2*np.random.rand()-1)*0.1)
+            synapses_from[i] += f_acause[dtick] #*(1+(2*np.random.rand()-1)*0.1)
+            synapses_to[i] += f_causal[-dtick] #*(1+(2*np.random.rand()-1)*0.1)
         elif decay:
             synapses_from[i] += a_linear_decay
             synapses_to[i] += a_linear_decay
